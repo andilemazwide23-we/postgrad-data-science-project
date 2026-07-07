@@ -1,6 +1,7 @@
 # Stroke Prediction Using Machine Learning
 
-Binary classification project predicting stroke risk from patient health and demographic data. Completed as part of the STAT606 coursework in the Postgraduate Diploma in Data Science (University of KwaZulu-Natal).
+Binary classification project predicting stroke risk from patient health and demographic data.
+Completed as part of the STAT606 coursework in the Postgraduate Diploma in Data Science (University of KwaZulu-Natal), Group of 2.
 
 **Authors:** Andile Ndwandwe & Sanele Mbuli
 
@@ -10,7 +11,7 @@ Stroke is a leading cause of death and disability worldwide. Early identificatio
 
 ## Dataset
 
-- **Source:** Healthcare Stroke Prediction dataset
+- **Source:** Healthcare Stroke Prediction dataset (Kaggle)
 - **Size:** 5,109 records
 - **Target variable:** `stroke` (1 = Stroke, 0 = No Stroke)
 - **Class distribution:** Stroke 4.87% | No Stroke 95.13% (severe imbalance)
