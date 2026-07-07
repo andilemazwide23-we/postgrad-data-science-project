@@ -3,73 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayo | Data Science Portfolio</title>
+
+<title>Andile Ndwandwe | Data Science Portfolio</title>
 
 <style>
 
-body{
+*{
     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#000;
-    color:white;
+    padding:0;
+    box-sizing:border-box;
 }
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+/* ================= HEADER ================= */
 
 header{
-    background:#111;
-    text-align:center;
-    padding:50px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:70px 10%;
+    background:white;
 }
 
-/* Profile Picture */
+.header-text{
+    max-width:600px;
+}
+
+.header-text h1{
+    font-size:60px;
+    color:#111;
+    margin-bottom:10px;
+}
+
+.header-text h2{
+    color:#0d6efd;
+    font-weight:normal;
+    margin-bottom:20px;
+}
+
+.header-text p{
+    font-size:20px;
+    color:#555;
+}
+
 .profile{
-    width:180px;
-    height:180px;
+    width:240px;
+    height:240px;
     border-radius:50%;
     object-fit:cover;
-    border:5px solid white;
-    margin-bottom:20px;
+    border:6px solid #0d6efd;
 }
 
-header h1{
-    margin:10px 0;
-    font-size:48px;
-}
-
-header p{
-    font-size:20px;
-    color:#cccccc;
-}
+/* ================= SECTIONS ================= */
 
 section{
-    width:80%;
-    margin:auto;
-    padding:40px 0;
+    width:90%;
+    max-width:1100px;
+    margin:60px auto;
 }
 
-h2{
+section h2{
+    font-size:36px;
+    margin-bottom:25px;
+    color:#111;
     text-align:center;
-    margin-bottom:20px;
 }
+
+/* ================= CARDS ================= */
 
 .card{
-    background:#1e1e1e;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    margin-bottom:30px;
+}
+
+.card p{
+    color:#555;
+}
+
+/* ================= PROJECTS ================= */
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.project-card{
+    background:white;
     padding:25px;
-    margin:25px 0;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(255,255,255,0.08);
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
     transition:0.3s;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 18px rgba(255,255,255,0.15);
+.project-card:hover{
+    transform:translateY(-8px);
 }
+
+.project-card h3{
+    color:#0d6efd;
+    margin-bottom:15px;
+}
+
+.project-card p{
+    color:#555;
+}
+
+/* ================= SKILLS ================= */
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.skill{
+    background:#0d6efd;
+    color:white;
+    padding:12px 22px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+/* ================= FOOTER ================= */
 
 footer{
     background:#111;
+    color:white;
     text-align:center;
-    padding:20px;
-    color:#cccccc;
+    padding:30px;
+    margin-top:60px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+header{
+    flex-direction:column-reverse;
+    text-align:center;
+}
+
+.profile{
+    margin-bottom:30px;
+}
+
+.header-text h1{
+    font-size:48px;
+}
+
+.header-text p{
+    font-size:18px;
+}
+
 }
 
 </style>
@@ -80,12 +176,20 @@ footer{
 
 <header>
 
-<!-- Replace profile.jpg with your picture name -->
-<img src="Andile.jfif" alt="Andile" class="profile">
+<div class="header-text">
 
 <h1>Ayo</h1>
 
-<p>Financial Data Quality Analyst | Aspiring Data Scientist</p>
+<h2>Financial Data Quality Analyst | Aspiring Data Scientist</h2>
+
+<p>
+Turning data into insights through analytics,
+machine learning and data visualisation.
+</p>
+
+</div>
+
+<img src="Andile.jfif" alt="Ayo" class="profile">
 
 </header>
 
@@ -96,42 +200,72 @@ footer{
 <div class="card">
 
 <p>
-Welcome to my Data Science portfolio.
 
-I enjoy solving real-world problems using data, statistics, machine learning, SQL, Power BI and Python.
+Hi, I'm <strong>Andile</strong>, an aspiring Data Scientist with a background in Financial Data Quality and a passion for solving real-world problems using data. I enjoy uncovering insights, building machine learning models, and creating data visualisations that support better decision-making. My skills include <strong>R, SQL, Power BI, Statistics, Machine Learning, and Data Analysis</strong>, and I have applied them in projects such as a Stroke Prediction Model and an Economic Complexity Index (ECI) analysis.
 
-I have experience in Financial Data Quality Analyst,  Analysis, Dynamics 365 Finance & Operations, and Machine Learning projects.
 </p>
 
 </div>
+
+</section>
+
+<section>
 
 <h2>Projects</h2>
 
-<div class="card">
+<div class="projects">
 
-<h3> Stroke Prediction</h3>
+<div class="project-card">
+
+<h3>🧠 Stroke Prediction Model</h3>
 
 <p>
-Developed machine learning models to predict stroke risk using healthcare data.
+
+Developed machine learning models to predict stroke risk using healthcare data. The project involved data preprocessing, model training, model evaluation, and comparing multiple algorithms to identify the best-performing model.
+
 </p>
 
 </div>
 
-<div class="card">
+<div class="project-card">
 
 <h3>📊 Economic Complexity Index (ECI)</h3>
 
 <p>
-Analysed which country attributes influence Economic Complexity Index (ECI) using statistical and machine learning techniques.
+
+Analysed factors influencing the Economic Complexity Index using statistical analysis and machine learning techniques to identify patterns and provide meaningful insights from the data.
+
 </p>
 
 </div>
 
-<h2>Skills</h2>
+</div>
 
-<div class="card">
+</section>
 
-Python • SQL • Power BI • R • Machine Learning • Statistics • Excel • Git • Data Analysis
+<section>
+
+<h2>Technical Skills</h2>
+
+<div class="skills">
+
+<div class="skill">R</div>
+
+<div class="skill">SQL</div>
+
+<div class="skill">Power BI</div>
+
+<div class="skill">Machine Learning</div>
+
+<div class="skill">Statistics</div>
+
+<div class="skill">Data Analysis</div>
+
+<div class="skill">Excel</div>
+
+<div class="skill">Git</div>
+
+<div class="skill">GitHub</div>
 
 </div>
 
@@ -139,7 +273,7 @@ Python • SQL • Power BI • R • Machine Learning • Statistics • Excel 
 
 <footer>
 
-© 2026 Andile Ndwandwe | Data Science Portfolio
+<p>© 2026 Andile Ndwandwe | Data Science Portfolio</p>
 
 </footer>
 
