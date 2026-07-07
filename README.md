@@ -7,7 +7,8 @@ Completed as part of the STAT606 coursework in the Postgraduate Diploma in Data 
 
 ## Project Overview
 
-Stroke is a leading cause of death and disability worldwide. Early identification of high-risk patients is critical for prevention. This project builds and compares several machine learning models to predict whether a patient will experience a stroke (Yes/No) based on medical and demographic factors.
+Stroke is a leading cause of death and disability worldwide. Early identification of high-risk patients is critical for prevention.
+This project builds and compares several machine learning models to predict whether a patient will experience a stroke (Yes/No) based on medical and demographic factors.
 
 ## Dataset
 
@@ -74,3 +75,20 @@ Logistic regression combined with SMOTE resampling provided the most reliable an
 ## Tools
 
 R, with packages for SMOTE resampling, H2O (decision tree), rpart (decision tree), and logistic regression modelling.
+
+## Results
+
+This project achieved an overall mark of **84%** as part of a university group project.
+
+The machine learning models were evaluated using standard classification metrics, including accuracy, precision, recall, F1-score, and ROC-AUC, to compare their predictive performance.
+
+## My Contribution
+
+This was a collaborative project completed by a team of two students. My contributions included:
+
+##Data preprocessing and cleaning
+ Exploratory Data Analysis (EDA)
+ Building and evaluating machine learning models
+ Interpreting model performance
+ Preparing the final presentation and documentation
+
