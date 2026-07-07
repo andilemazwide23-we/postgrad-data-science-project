@@ -1,57 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayo | Data Science Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayo | Data Science Portfolio</title>
 
-    <style>
+<style>
 
-        body{
-            margin:0;
-            font-family:Arial, Helvetica, sans-serif;
-            background:#f4f4f4;
-            color:#333;
-        }
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#000;
+    color:white;
+}
 
-        header{
-            background:#0d47a1;
-            color:white;
-            padding:60px 20px;
-            text-align:center;
-        }
+header{
+    background:#111;
+    text-align:center;
+    padding:50px 20px;
+}
 
-        header h1{
-            margin:0;
-            font-size:48px;
-        }
+/* Profile Picture */
+.profile{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid white;
+    margin-bottom:20px;
+}
 
-        header p{
-            font-size:20px;
-        }
+header h1{
+    margin:10px 0;
+    font-size:48px;
+}
 
-        section{
-            width:80%;
-            margin:auto;
-            padding:40px 0;
-        }
+header p{
+    font-size:20px;
+    color:#cccccc;
+}
 
-        .card{
-            background:white;
-            padding:20px;
-            margin:20px 0;
-            border-radius:10px;
-            box-shadow:0px 3px 10px rgba(0,0,0,0.1);
-        }
+section{
+    width:80%;
+    margin:auto;
+    padding:40px 0;
+}
 
-        footer{
-            background:#0d47a1;
-            color:white;
-            text-align:center;
-            padding:20px;
-        }
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
 
-    </style>
+.card{
+    background:#1e1e1e;
+    padding:25px;
+    margin:25px 0;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(255,255,255,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 18px rgba(255,255,255,0.15);
+}
+
+footer{
+    background:#111;
+    text-align:center;
+    padding:20px;
+    color:#cccccc;
+}
+
+</style>
 
 </head>
 
@@ -59,7 +80,10 @@
 
 <header>
 
-<h1>Andile Ndwandwe</h1>
+<!-- Replace profile.jpg with your picture name -->
+<img src="Andile.jfif" alt="Andile" class="profile">
+
+<h1>Ayo</h1>
 
 <p>Financial Data Quality Analyst | Aspiring Data Scientist</p>
 
@@ -74,7 +98,9 @@
 <p>
 Welcome to my Data Science portfolio.
 
-I enjoy solving real-world problems using data, statistics, machine learning, SQL, Power BI and R.
+I enjoy solving real-world problems using data, statistics, machine learning, SQL, Power BI and Python.
+
+I have experience in Financial Data Quality Analyst,  Analysis, Dynamics 365 Finance & Operations, and Machine Learning projects.
 </p>
 
 </div>
@@ -83,20 +109,20 @@ I enjoy solving real-world problems using data, statistics, machine learning, SQ
 
 <div class="card">
 
-<h3>🧠 Stroke Prediction</h3>
+<h3> Stroke Prediction</h3>
 
 <p>
-Machine Learning model for predicting stroke risk.
+Developed machine learning models to predict stroke risk using healthcare data.
 </p>
 
 </div>
 
 <div class="card">
 
-<h3>📊 ECI Project</h3>
+<h3>📊 Economic Complexity Index (ECI)</h3>
 
 <p>
-Business analytics and reporting project.
+Analysed which country attributes influence Economic Complexity Index (ECI) using statistical and machine learning techniques.
 </p>
 
 </div>
@@ -105,7 +131,7 @@ Business analytics and reporting project.
 
 <div class="card">
 
-Python • SQL • Power BI • R • Machine Learning • Statistics
+Python • SQL • Power BI • R • Machine Learning • Statistics • Excel • Git • Data Analysis
 
 </div>
 
@@ -118,5 +144,4 @@ Python • SQL • Power BI • R • Machine Learning • Statistics
 </footer>
 
 </body>
-
 </html>
