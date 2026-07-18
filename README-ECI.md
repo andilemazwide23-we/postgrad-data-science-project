@@ -1,41 +1,30 @@
-# Economic Complexity in Sub-Saharan Africa: A Power BI Analysis
+# Economic Complexity in Sub-Saharan Africa: Power BI Analysis
 
-**Team project | Power BI, R, Data Cleaning & Visualization**
+**Team Project | Power BI, R, Data Cleaning & Visualization | Final Grade: 97%**
 
 ## Overview
 
-This project analyzed the **Economic Complexity Index (ECI)**, a measure of how sophisticated and diversified a country's productive economy is, for 30 sub-Saharan African countries over a 24-year period (1995 to 2018), using a panel dataset of 500 country-year observations.
+Analyzed the **Economic Complexity Index (ECI)** for 30 Sub-Saharan African countries (1995–2018) using a panel dataset of 500 country-year observations. As part of a five-person team, we developed an interactive Power BI dashboard to explore regional trends, changes over time, and relationships between ECI and economic, environmental, and tourism indicators.
 
-Working in a team of five, we built an interactive Power BI report to answer four questions: how ECI is distributed across countries in the region, how it has changed over time, which economic and environmental variables are related to it, and whether richer, cleaner, or more visited countries tend to have higher ECI.
+## My Contribution: Data Preparation
 
-## My Contribution: Data Preparation & Cleaning
+Led data cleaning and preprocessing to ensure reliable analysis by:
 
-I led the data preparation stage, which underpinned the reliability of the entire analysis. Key decisions I made:
+* Designing a **hierarchical missing-value imputation** strategy (country → year → global median, or vice versa depending on the variable).
+* Using **median imputation** for skewed economic indicators such as GDP and CO₂ emissions to reduce the impact of outliers.
+* Treating missing **coal rents** as true zeros, reflecting countries without coal sectors rather than missing data.
 
-**Hierarchical missing-value imputation.** Rather than a single blanket approach, I applied a country then year then global median fallback (or year then country then global, depending on the variable), matched to each variable's underlying behavior. For example, tourism and air transport used year-level imputation first, since these are more affected by global shocks such as financial crises, while GDP and CO2 used country-level imputation first, since these reflect structural, country-specific patterns.
-
-**Median over mean.** This was chosen specifically because economic indicators like GDP and emissions are heavily skewed, and the median is far more robust to outliers than the mean.
-
-**Coal rents as true zero.** Rather than imputing, I recognized that missing coal rent values reflected countries with no coal sector at all, so these were set to zero rather than estimated.
-
-This groundwork meant the rest of the team could build visuals on a clean, structurally sound dataset of 500 observations across 30 countries, without the distortion that naive imputation would have introduced.
+This produced a clean, consistent dataset that supported the team's visualizations and analysis.
 
 ## Key Findings
 
-**Distribution across the region.** Southern Africa shows the highest average ECI, reflecting a historical concentration of industrial and service-based economies. Central Africa consistently shows the lowest ECI, with most countries losing complexity over time. East Africa is more mixed, with some standout improvers, and West Africa shows wide variation with no clear regional pattern.
-
-**Change over time.** The region has seen slow, modest improvement in economic complexity over two decades. But this masks a divide: former regional leaders like **South Africa** have actually lost complexity over time, while smaller economies like **Tanzania** have shown consistent, steady improvement.
-
-**What's driving the improvers?** Angola and Uganda stand out, still low on absolute ECI, but improving faster than most neighbors. Three factors explain this. First, economic diversification: Angola is channeling oil revenue into agriculture, telecoms, and mining, while Uganda is shifting from raw agricultural exports toward processed goods and consumer products. Second, trade and transport infrastructure: Angola has invested in routes linking mining regions to export ports, and Uganda benefits from stronger regional trade access through the African Continental Free Trade Area (AfCFTA). Third, long-term development planning: Uganda's "Tenfold Growth Strategy" explicitly targets reduced dependence on single export sectors in favor of industrial growth.
-
-Meanwhile, South Africa's declining ECI doesn't erase its role as the region's industrial anchor; it still leads in manufacturing capacity, technology, and technical skills. Through regional trade partnerships, neighbors like Botswana, Lesotho, and Eswatini have an opening to grow agro-processing and light manufacturing, but only if they also invest in infrastructure, education, and technical skills themselves.
-
-**What's correlated with ECI?** Tourism arrivals and CO2 emissions per capita show the strongest positive relationship: more visited, more industrially active countries tend to be more complex. GDP per capita and air transport show a moderate positive relationship, though it isn't linear. Energy inefficiency and coal rents show a negative relationship: countries reliant on coal or energy-intensive processes tend to score lower, consistent with a resource curse pattern.
-
-Interestingly, cleaner countries did not have higher ECI; the opposite was observed, since industrial activity drives both complexity and emissions together. More visited countries did show higher ECI, making tourism one of the strongest positive correlates in the dataset.
+* Southern Africa had the highest average ECI, while Central Africa consistently recorded the lowest.
+* Regional ECI improved gradually over time, although countries such as **South Africa** declined while **Tanzania**, **Angola**, and **Uganda** showed steady gains.
+* Tourism arrivals and CO₂ emissions had the strongest positive correlation with ECI, while coal rents and energy inefficiency were negatively associated.
+* Results suggest that economic diversification, trade infrastructure, and industrial development are more strongly linked to economic complexity than environmental performance alone.
 
 ## Tools & Techniques
 
-Power BI (interactive report with slicers and filters across year and country category), R script visual for statistical analysis, hierarchical data imputation, panel data structuring, choropleth and bubble mapping, correlation analysis via scatterplots with trendlines.
+Power BI, R, panel data analysis, hierarchical data imputation, choropleth and bubble maps, scatterplots with trendlines, interactive dashboards, and correlation analysis.
 
-Team project, presented as a 20-minute interactive walkthrough to the class.
+Presented as a 20-minute interactive walkthrough.
