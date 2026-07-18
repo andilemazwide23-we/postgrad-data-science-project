@@ -3,145 +3,400 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayo | Data Science Portfolio</title>
-
+<title>Andile Ndwandwe — Data Science Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #F3F4F1;
+    --panel: #FFFFFF;
+    --ink: #17212B;
+    --ink-soft: #55636D;
+    --line: #DCE1E0;
+    --navy: #16324F;
+    --navy-deep: #0E2137;
+    --gold: #B8862E;
+    --gold-soft: #F1E6D2;
+    --sans: 'Inter', sans-serif;
+    --serif: 'Fraunces', serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
 
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#000;
-    color:white;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-header{
-    background:#111;
-    text-align:center;
-    padding:50px 20px;
-}
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* Profile Picture */
-.profile{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid white;
-    margin-bottom:20px;
-}
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 30px; }
 
-header h1{
-    margin:10px 0;
-    font-size:48px;
-}
+  a { color: inherit; }
 
-header p{
-    font-size:20px;
-    color:#cccccc;
-}
+  /* ---------------- HEADER ---------------- */
+  header.hero {
+    background: var(--navy-deep);
+    color: #EDEFEA;
+    padding: 32px 0 0;
+  }
 
-section{
-    width:80%;
-    margin:auto;
-    padding:40px 0;
-}
+  .hero-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    padding-bottom: 20px;
+  }
 
-h2{
-    text-align:center;
-    margin-bottom:20px;
-}
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8FAFC7;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    display: inline-block;
+    border-radius: 50%;
+  }
 
-.card{
-    background:#1e1e1e;
-    padding:25px;
-    margin:25px 0;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(255,255,255,0.08);
-    transition:0.3s;
-}
+  .hero-text h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 4.4vw, 42px);
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+  }
 
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 18px rgba(255,255,255,0.15);
-}
+  .hero-text h2 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15.5px;
+    color: #B9C7D1;
+    margin-top: 8px;
+  }
 
-footer{
-    background:#111;
-    text-align:center;
-    padding:20px;
-    color:#cccccc;
-}
+  .hero-text p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #93A3AE;
+    max-width: 48ch;
+  }
 
+  .profile-wrap { flex-shrink: 0; }
+  .profile {
+    width: 210px;
+    height: 210px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: block;
+  }
+
+  .links-row {
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+  }
+  .link-pill {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-decoration: none;
+    color: #EDEFEA;
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: 0.2s ease;
+  }
+  .link-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* stat strip */
+  .stat-strip {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-strip div {
+    padding: 12px 8px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+  }
+  .stat-strip div:last-child { border-right: none; }
+  .stat-strip .figure {
+    font-family: var(--mono);
+    font-size: 18px;
+    color: var(--gold);
+  }
+  .stat-strip .label {
+    font-size: 12px;
+    color: #A7B6C0;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 700px) {
+    .hero-inner { flex-direction: column-reverse; align-items: flex-start; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-strip div:nth-child(2) { border-right: none; }
+  }
+
+  /* ---------------- SECTIONS ---------------- */
+  section { padding: 32px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gold);
+  }
+  h3.section-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--navy-deep);
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 24px;
+  }
+  .card p { color: var(--ink-soft); max-width: 68ch; font-size: 14px; }
+  .card strong { color: var(--ink); }
+
+  /* projects */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--navy); transform: translateY(-3px); }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .project-card h4 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy-deep);
+    margin-bottom: 8px;
+  }
+
+  .project-card p { color: var(--ink-soft); font-size: 13.5px; flex-grow: 1; }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .project-card .btn-row .btn {
+    margin-top: 0;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--navy-deep);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover {
+    background: var(--navy-deep);
+    color: #EDEFEA;
+    border-color: var(--navy-deep);
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 14px;
+    background: var(--navy-deep);
+    color: #EDEFEA;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.2s ease;
+  }
+  .btn:hover { background: var(--gold); color: var(--navy-deep); }
+
+  .badge-soon {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+
+  /* skills */
+  .skill-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .skill {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  footer {
+    background: var(--navy-deep);
+    color: #8896A0;
+    text-align: center;
+    padding: 20px 0;
+    font-family: var(--mono);
+    font-size: 11.5px;
+  }
 </style>
-
 </head>
-
 <body>
 
-<header>
-
-<!-- Replace profile.jpg with your picture name -->
-<img src="Andile.jfif" alt="Andile" class="profile">
-
-<h1>Ayo</h1>
-
-<p>Financial Data Quality Analyst | Aspiring Data Scientist</p>
-
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow">Data Science Portfolio</div>
+        <h1>Andile Ndwandwe</h1>
+        <h2>Financial Data Quality Analyst → Data Scientist</h2>
+        <p>Turning data into decisions through statistical analysis, machine learning, and clear visualisation.</p>
+        <div class="links-row">
+          <a class="link-pill" href="https://github.com/andilemazwide23-we" target="_blank">GitHub ↗</a>
+          <a class="link-pill" href="#projects">Projects ↓</a>
+          <a class="link-pill" href="#skills">Skills ↓</a>
+        </div>
+      </div>
+      <div class="profile-wrap">
+        <img src="Andile.jfif" alt="Andile Ndwandwe" class="profile">
+      </div>
+    </div>
+  </div>
+  <div class="stat-strip">
+    <div><div class="figure">3+ yrs</div><div class="label">Financial Data Quality Analyst</div></div>
+    <div><div class="figure">BSc</div><div class="label">Applied Mathematics</div></div>
+    <div><div class="figure">PGDip</div><div class="label">Data Science, in progress</div></div>
+    <div><div class="figure" style="font-size:15px;">R · SAS · SQL</div><div class="label">Core toolkit</div></div>
+  </div>
 </header>
 
-<section>
+<div class="wrap">
 
-<h2>About Me</h2>
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h3 class="section-title">About</h3></div>
+    <div class="card">
+      <p>
+        I'm an aspiring Data Scientist with a background in financial data quality and a passion for solving real-world problems with data. I enjoy uncovering insights, building machine learning models, and creating visualisations that support better decision-making.
+      </p>
+      <p style="margin-top:14px;">
+        <strong>Core skills:</strong> R, SQL, Power BI,SAS,statistics, machine learning, and data mining. I applied these skills in projects ranging from a stroke risk prediction model to Economic Complexity Index analysis.
+      </p>
+    </div>
+  </section>
 
-<div class="card">
+  <section id="projects">
+    <div class="section-head"><span class="section-num">02</span><h3 class="section-title">Projects</h3></div>
+    <div class="projects">
 
-<p>
-Welcome to my Data Science portfolio.
+      <div class="project-card">
+        <div class="project-tag">Machine Learning · R</div>
+        <h4>Stroke Prediction Model</h4>
+        <p>Developed and evaluated four classification models which are Naive Bayes, two decision trees, and logistic regression to predict stroke risk from patient health data, addressing severe class imbalance with SMOTE resampling.</p>
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/andilemazwide23-we/postgrad-data-science-project/blob/main/README.md" target="_blank">View Project →</a>
+          <a class="btn btn-ghost" href="https://github.com/andilemazwide23-we/postgrad-data-science-project/blob/main/stroke_prediction_model.R" target="_blank">View Code</a>
+        </div>
+      </div>
 
-I enjoy solving real-world problems using data, statistics, machine learning, SQL, Power BI and Python.
+      <div class="project-card">
+        <div class="project-tag">Statistical Analysis</div>
+        <h4>Economic Complexity Index (ECI)</h4>
+        <p>Analysed the factors influencing a country's Economic Complexity Index using statistical analysis and machine learning techniques to identify patterns and extract meaningful insights.</p>
+        <div class="badge-soon">Repository coming soon</div>
+      </div>
 
-I have experience in Financial Data Quality Analyst,  Analysis, Dynamics 365 Finance & Operations, and Machine Learning projects.
-</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><span class="section-num">03</span><h3 class="section-title">Technical Skills</h3></div>
+    <div class="skill-groups">
+      <div>
+        <div class="skill-group-label">Languages &amp; Query</div>
+        <div class="skill-tags">
+          <div class="skill">R</div>
+          <div class="skill">SQL</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Analysis &amp; Modelling</div>
+        <div class="skill-tags">
+          <div class="skill">Machine Learning</div>
+          <div class="skill">Statistics</div>
+          <div class="skill">Data Mining</div>
+          <div class="skill">Data Analysis</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-label">Tools</div>
+        <div class="skill-tags">
+          <div class="skill">Power BI</div>
+          <div class="skill">Excel</div>
+          <div class="skill">SAS Enterprise Guide</div>
+          <div class="skill">SAS Studio</div>
+          <div class="skill">GitHub</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </div>
 
-<h2>Projects</h2>
-
-<div class="card">
-
-<h3> Stroke Prediction</h3>
-
-<p>
-Developed machine learning models to predict stroke risk using healthcare data.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>📊 Economic Complexity Index (ECI)</h3>
-
-<p>
-Analysed which country attributes influence Economic Complexity Index (ECI) using statistical and machine learning techniques.
-</p>
-
-</div>
-
-<h2>Skills</h2>
-
-<div class="card">
-
-Python • SQL • Power BI • R • Machine Learning • Statistics • Excel • Git • Data Analysis
-
-</div>
-
-</section>
-
-<footer>
-
-© 2026 Andile Ndwandwe | Data Science Portfolio
-
-</footer>
+<footer>© 2026 Andile Ndwandwe — Data Science Portfolio</footer>
 
 </body>
 </html>
