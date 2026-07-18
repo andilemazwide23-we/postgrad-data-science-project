@@ -13,11 +13,9 @@ library(ROSE)
 library(mltools)
 # Load library used for SMOTE
 library(UBL)
-# this is to turn scientific notation off so the output is easier to interpret:
-options(scipen = 999) # turn back on by changing to 0
+options(scipen = 999) 
 
-# 1. Setup & User Parameters -------------------------------------------------- 
-# ----------------------------------------------------------------------------- #
+# 1. Setup & User Parameters ---------------------------------------------
 
 # User-specified parameters
 seed = 456     # Seed for reproducibility (students can change)
@@ -25,20 +23,12 @@ train_frac <- 0.7  # Proportion of data in training set
 metric <- "F1" # "auc", "aucpr" (Area Under Precision–Recall Curve), "logloss", "Accuracy", "Specificity", "Precision", "Recall", "F1" 
 folds <- 5 # for 5-fold CV, or change to 10
 
-#2. Load, Inspect and Format Data --------------------------------------------
-  # ----------------------------------------------------------------------------- #
-  
-  # This demonstration makes use of depression data which has already been structured and cleaned. It is in an .RData file on Moodle. 
-  
-  # This data contains information pertaining to an individual's depression status (based on self-reporting), in addition to some characteristics of the individual. The objective is to use the attributes to predict a person's depression status.
-# The file called 'Variable Values for Depression Data' contains the category names and levels for the categorical attributes.
   
 library(readr)
 Stroke_predictions <- read_csv("Stroke_predictions.csv",show_col_types = FALSE)
 View(Stroke_predictions)
 
 Stroke_predictions <- data.frame(Stroke_predictions)
-# look at the properties of the data
 summary(Stroke_predictions)
 
 
@@ -52,27 +42,19 @@ Stroke_predictions$smokes <- factor(Stroke_predictions$smokes)
 Stroke_predictions$Unknown <- factor(Stroke_predictions$Unknown) # this is actually the target
 Stroke_predictions$stroke<- factor(Stroke_predictions$stroke)
 
-# check new factors variables again for sparsity and high cardinality:
 summary(Stroke_predictions)
 
-
-# use the following to determine the number of levels (cardinality) of the factor variables:
-
 sapply(Filter(is.factor, Stroke_predictions), nlevels)
-#Note the severe class imbalance for the target (Depression):
-
 round(prop.table(table(Stroke_predictions$stroke))*100,2)
 
 df <- Stroke_predictions
 target <- "stroke"
 summary(df[[target]])
 
-#4. Train/Test Split --------------------------------------------------------- 
-  # ----------------------------------------------------------------------------- #
+ Train/Test Split --------------------------------------------------------- 
+ 
   
-  set.seed(seed)  
-
-# stratified sampling is used to maintain the proportion of class labels in your training and test sets:
+set.seed(seed)  
 split=sample.split(df[[target]],SplitRatio = train_frac) # train_frac was specified under the setup above 
 
 training_set=subset(df,split==TRUE) 
@@ -82,10 +64,6 @@ summary(training_set[[target]]) # check the class imbalance in the training set
 
 ##################### Under-sampling ###############################
 
-# The process of undersampling counts the number of minority samples in the dataset (given by for formula for total_under below), then randomly selects the same number from the majority sample. In our case we would end up with 70 randomly chosen non-depression cases ("0") and the original 70 depression cases ("1") resulting in a 50:50 split.
-# This has a major drawback as we are only using a very small % of the original dataset.
-
-# save the number of MINORITY cases in an object call total_under:
 total_under <- nrow(training_set[training_set[[target]] == "1", ])
 
 train_under <- ovun.sample(
@@ -103,9 +81,6 @@ summary(train_under_data[[target]])
 
 ############################## Over-sampling ##############################################
 
-# This method repeatedly duplicates randomly selected minority classes until there are an equal number of majority and minority samples. It does have its drawback as the duplicates may lead to generalizing of the minority class.
-
-# save the number of MAJORITY cases in an object call total_over:
 total_over <- nrow(training_set[training_set[[target]] == "0", ])
 
 train_over <- ovun.sample(
@@ -116,14 +91,10 @@ train_over <- ovun.sample(
   seed = seed
 )
 
-# Extract and save the resulting under-sampled data:
 train_over_data <- train_over$data
 summary(train_over_data[[target]])
 
 ###################### Combination of over and under #################################
-
-# We can apply a combination of both over- and under-sampling, where the number of minority
-# cases increases and the number of majority cases decreases.
 
 total_both <- nrow(training_set) # specify the total sample size after the procedure, this can be changed to any value
 fraction_new <- 0.50 # specify the approx proportion of minority cases to be produced
@@ -143,11 +114,6 @@ summary(train_both_data[[target]])
 
 ####################################### SMOTE ##################################
 
-
-# We use the SmoteClassif function which allows us to specify the method of determining the synthetic observations based on the nearest neighbours. We use the dist option to specify the method to use based on the type of data (see https://rdrr.io/cran/UBL/man/smoteClassif.html)
-
-# The depression data has mixed attributes (numerical and categorical), so we use HEOM or HVDM
-
 set.seed(seed)
 train_smote_data <- SmoteClassif(
   as.formula(paste(target, "~ .")),
@@ -159,13 +125,7 @@ train_smote_data <- SmoteClassif(
 
 summary(train_smote_data[[target]])
 
-# ----------------------------------------------------------------------------- #
-
 h2o.init()
-
-# ----------------------------------------------------------------------------- #
-# 8. Specify the attribute names ----------------------------------------------
-# ----------------------------------------------------------------------------- #
 
 predictors <- setdiff(names(training_set), target)
 
@@ -173,32 +133,12 @@ predictors <- setdiff(names(training_set), target)
 # 9.Repeatedly fit the LR model ----------------------------------------------
 # ----------------------------------------------------------------------------- #
 
-# Recall that we now have 4 balanced training sets and the original unbalanced set:
-# "train_under_data" (based on under-sampling),
-# "train_over_data" (based on over-sampling),
-# "train_both_data" (based on a combination of over- and under-sampling)
-# "train_smote_data" (based on SMOTE)
-# "training_set" (the unbalanced original training set)
-
-# We will iterate through each of them, fitting an LR and determine their performances.
-
-# Prepare the results data frame to append the results of each data set:
 Performance_comparison <- data.frame()
-
-#################  THE CODE BELOW IS RE-RUN FOR EACH TRAINING SET  (see lecture recording) ############
-
-# Let's create a variable to use for the name of the balanced training set which we can update rather than repeating the code for each training set:
-
-### Loop through this code to get appended results, just change the name of the data set:  
-
 
 train_set_name <- "train_smote_data"
 
-# train_set_name just stores the name of the data set, not the data set itself. To use the actual data frame referenced by its name, you can use get():
-
 training_set_final <- get(train_set_name)
 
-# convert to h2o data sets:
 
 balanced_train_set_h2o <- as.h2o(training_set_final)
 test_h2o <- as.h2o(test_set) 
@@ -231,16 +171,6 @@ test_h2o <- as.h2o(test_set)
 #test_LR_pred <- cbind(test_set,
                      # setNames(preds_LR_test[, 3, drop = FALSE], "pred_prob")) 
 
-
-# ----------------------------------------------------------------------------- #
-# 10. Save model performance results repeatedly for each data set --------------
-# ----------------------------------------------------------------------------- #
-
-# When training a classification model on a balanced dataset (achieved through oversampling techniques such as random oversampling or SMOTE), the model learns from an artificial class distribution that does not reflect reality. As a result, the predicted probabilities will be miscalibrated, typically inflated for the minority class. 
-
-# If the goal is simply to predict a class label and the decision threshold has been appropriately tuned, correction may not be necessary. Similarly, if evaluation relies solely on AUC-ROC, calibration does not affect the ranking of predictions and correction can be omitted. 
-
-# Therefore, we will use the AUC to compare the performance of the LR models fitted with the different datasets:
 
 ######### Extract and append results to a data frame ############
 
@@ -281,11 +211,6 @@ test_h2o <- as.h2o(test_set)
 
 
 #7. Fit Naive Bayes Classifier -----------------------------------------------
-  # ----------------------------------------------------------------------------- #
-  
-  # Build and train the Naive Bayes Classifier (https://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/naive-bayes.html):
-  
-  # No hyperparameter tuning is required so we can go straight into fitting the model:
   
   ########## --> Fit the model ----
 
@@ -388,9 +313,6 @@ pROC::auc(roc_nb_test)
 plot(roc_nb_test)
 
 #8. Fit a decision tree using h2o --------------------------------------------
-  # ----------------------------------------------------------------------------- #
-  
-  # We will demonstrate how to fit a DT using H2O which uses pre-pruning, as well as RPART which uses post-pruning
   
   ########## --> Hyperparameter tuning ----
 
@@ -412,11 +334,6 @@ search_criteria <- list(
   strategy = "Cartesian" # Try "RandomDiscrete" for random search
 )
 
-# we use the h2o.grid function for cross validation and hyperparameter tuning. This function requires a grid_id which is a label for the entire grid search run so that H2O can store, retrieve, and reference it. 
-
-#NB: Each grid search is saved as a named experiment in grid_id. Once a grid_id is used, it cannot be overwritten — it is permanently stored in the H2O session until we explicitly remove it. 
-
-# Therefore, if we update the grid search or hyperparameter list and re-run the h2o.grid function, we need to remove the anything store in the grid_id first:
 
 h2o.rm("dtree_grid")
 
@@ -438,12 +355,11 @@ grid <- h2o.grid(
   nfolds =folds
 )
 
-# Next we order the grid search results according to the best CV performance based on our selected metric and save it in model_results_dt
 
 model_results_dt <- h2o.getGrid("dtree_grid", sort_by = metric, decreasing = TRUE) # arrange metric in descending order so that the first model in this object has the best CV performance 
 
 
-# Let's view the CV results 
+
 print(model_results_dt)
 
 # Extract the best model ID _which is in the first row of model_results_dt
@@ -466,10 +382,6 @@ best_tuned_values <- lapply(tuned_param_names, function(param_name) {
 names(best_tuned_values) <- tuned_param_names
 
 ########## --> Fit the model ----
-
-# Step 3: Build and train the final decision tree using h2o.decision_tree()
-# We use do.call so the extracted hyperparameters are passed automatically
-# (you can add any other fixed parameters you want here)
 
 final_dt_model <- do.call(h2o.decision_tree, c(
   list(
@@ -563,20 +475,6 @@ plot(roc_dt_test)
 
 # ----------------------------------------------------------------------------- #
 # 9. Fit a decision tree using rpart --------------------------------------------
-# ----------------------------------------------------------------------------- #
-
-# we will use another package that fits a DT that allows for a visualization. This package grows the tree by implementing Cost-Complexity pruning, where pre and post pruning is implemented using a complexity parameter (cp). The complexity parameter (cp) is used to control the size of the decision tree and to select the optimal tree size.
-
-# cp sets the minimum improvement a split must provide to be worth making.
-# Any split that does not decrease the overall lack-of-fit (error) by at least a factor of cp is not attempted.
-# Higher cp → smaller, simpler trees (more pruning).
-# Lower cp → larger, more complex trees (less pruning, higher risk of overfitting).
-
-#rpart does not have functionality for specifying grid searches, only single values. 
-
-########## --> Fit the DT using Rpart ----
-
-# NOTE: We use the training and test sets that were originally split, not the ones from H2O.
 
 set.seed(seed)
 
@@ -620,25 +518,9 @@ DT_rpart # run this to see information about the fitted tree
 printcp(DT_rpart)
 plotcp(DT_rpart)
 
-# The cp table includes:
-
-# The cp penalty value associated with each subtree
-
-# nsplit: Number of splits in the tree (more splits = more complex tree)
-
-# The rel error is the total error of the model divided by the error of the initial model (a model with just the root node, predicting the most frequent class). It's a measure of the error relative to the simplest possible model.
-
-# The xerror is the cross-validation error of the model relative to te root node model(0 splits). It is computed during the tree-building process if cross-validation is enabled (e.g., using the xval argument in rpart()). This error is estimated by applying the decision tree to each of the cross-validation folds used during tree construction. It provides a measure of how well the tree is likely to perform on unseen data, hence an estimate of the model's generalization error. Typically, it helps identify if the model is overfitting. If xerror starts to increase as the complexity of the model increases (more splits in the tree), it may suggest that simpler models are preferable.
-
-# The xstd is the standard error of the cross-validation error (xerror). This value provides an indication of the variability of the cross-validation error estimate. A high standard error suggests that the cross-validation error might not be a reliable estimate of the model's error on new data, possibly due to the model being unstable across different subsets of the training data or due to a small number of cross-validation folds.
-
-# rpart() automatically computes the optimal tree size (considering complexity cost) using these metrics. Specifically, xerror and xstd are used to determine the smallest tree that is within one standard error of the minimum cross-validation error (xerror + xstd). This criterion helps to balance model accuracy with complexity, aiming to avoid overfitting while maintaining sufficient explanatory power.
-
 
 ########## --> Extract predicted probabilities ----
 
-### Extract predicted probabilities:
-# Note: this provides TWO columns - the predicted probabilities for "0" in column 1 and "1" in column 2.
 
 pred_prob_DT_train <- predict(DT_rpart, newdata = training_set_final, type = "prob")
 
@@ -722,10 +604,6 @@ rpart.plot(DT_rpart, yesno = 1, type = 2, fallen.leaves = FALSE) # add additiona
 # ----------------------------------------------------------------------------- #
 # 10. Fit a logistic regression model --------------------------------------------
 # ----------------------------------------------------------------------------- #
-
-# A logistic regression is in the class of a generalized linear model (GLM), various GLMs can be fitted in h2o for different types of responses (continuous, binary, count, multiple categories - multi-class classification)
-
-# An LR model has no hyperparameters to tune.
 
 ########## --> Fit the LR model in H2O ----
 
@@ -850,7 +728,5 @@ legend(
   lwd = 2
 )
 
-
-############## Shut down H2O cluster so it doesn't use up any more resources ############
 
 h2o.shutdown(prompt = FALSE)
