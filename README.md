@@ -3,7 +3,7 @@
 Binary classification project predicting stroke risk from patient health and demographic data. 
 Completed as part of the STAT606 coursework in the Postgraduate Diploma in Data Science (University of KwaZulu-Natal),Group of 2.
 
-**Authors:** Andile Ndwandwe & Sanele Mbuli
+Final Grade : **84%**
 
 ## Project Overview
 
@@ -75,12 +75,6 @@ Logistic regression combined with SMOTE resampling provided the most reliable an
 ## Tools
 
 R, with packages for SMOTE resampling, H2O (decision tree), rpart (decision tree), and logistic regression modelling.
-
-## Results
-
-This project achieved an overall mark of **84%** as part of a university group project.
-
-The machine learning models were evaluated using standard classification metrics, including accuracy, precision, recall, F1-score, and ROC-AUC, to compare their predictive performance.
 
 ## My Contribution
 
